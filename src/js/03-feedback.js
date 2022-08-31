@@ -30,9 +30,7 @@ function populateMessage() {
     const savedMessage = localStorage.getItem(STORAGE_KEY);
     if (savedMessage) {
         const parseSaveMessage = JSON.parse(savedMessage);
-        console.log("parseSaveMessage", parseSaveMessage);
         formData = parseSaveMessage;
-        console.log("formData", formData);
         refs.email.value = formData.email;
         refs.message.value = formData.message;
     }
