@@ -21,9 +21,18 @@ function onFormInput(e) {
 
 function onFormSubmit(e) {
     e.preventDefault();
-    console.log("formData", formData);
-    e.currentTarget.reset();
-    localStorage.removeItem(STORAGE_KEY);
+    console.log("refs.email.textContent", refs.email.textContent);
+    console.log("refs.message.textContent", refs.message.textContent);
+    console.log("refs.email.value", refs.email.value);
+    console.log("refs.message.value", refs.message.value);
+    if(refs.email.value === '' || refs.message.value === '') {
+        alert("ВСІ ПОЛЯ ПОВИННІ БУТИ ЗАПОВНЕНІ!!!!");
+        return;
+    } else {
+        e.currentTarget.reset();
+        localStorage.removeItem(STORAGE_KEY);
+        formData = {};
+    }         
 }
 
 function populateMessage() {
@@ -31,7 +40,15 @@ function populateMessage() {
     if (savedMessage) {
         const parseSaveMessage = JSON.parse(savedMessage);
         formData = parseSaveMessage;
-        refs.email.value = formData.email;
-        refs.message.value = formData.message;
+        if (formData.message === undefined) {
+            refs.message.value = '';
+        } else {
+            refs.message.value = formData.message;
+        }
+        if (formData.email === undefined) {
+            refs.email.value = '';
+        } else {
+            refs.email.value = formData.email;
+        }        
     }
 }
